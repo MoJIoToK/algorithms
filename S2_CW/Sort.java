@@ -11,7 +11,7 @@ public class Sort {
 
     public static void main(String[] args) {
 
-        int[] array = new int[100];
+        int[] array = new int[10000];
         fillArray(array);
 
         // int[] bubbleArray = new int[10000];
@@ -20,19 +20,19 @@ public class Sort {
         // fillArray(bubbleArray);
 
         directSort(array);
-        //fillArray(array);
+        // fillArray(array);
 
-        //bubbleSort(array);
-        //fillArray(array);
+        // bubbleSort(array);
+        // fillArray(array);
 
-        //long startTime = quickSort(array, 0, array.length - 1);
-        //System.out.println("QuickSort: " + (System.currentTimeMillis() - startTime));
+        // long startTime = quickSort(array, 0, array.length - 1);
+        // System.out.println("QuickSort: " + (System.currentTimeMillis() - startTime));
 
         int a = array[new Random().nextInt(array.length)];
-        long start = binarySearch(array, a, 0,array.length - 1);
-        System.out.println("Binary: " + (System.nanoTime() - start));
+        int val = binarySearch(array, a, 0, array.length - 1);
+        System.out.println("Binary: " + val);
 
-        System.out.println( );
+        System.out.println();
 
         long start1 = linearFind(array, a);
         System.out.println("Linear: " + (System.nanoTime() - start1));
@@ -43,12 +43,12 @@ public class Sort {
         Random r = new Random();
         for (int i = 0; i < array.length; i++) {
             array[i] = r.nextInt();
-            //System.out.print(array[i] + " ");
+            // System.out.print(array[i] + " ");
         }
     }
 
     public static void directSort(int[] array) {
-        
+
         long start = System.currentTimeMillis();
         for (int i = 0; i < array.length - 1; i++) {
             for (int j = i + 1; j < array.length; j++) {
@@ -113,7 +113,7 @@ public class Sort {
         return start;
     }
 
-    public static long binarySearch(int[] array, int value, int min, int max) {
+    public static int binarySearch(int[] array, int value, int min, int max) {
         int midpoint;
         long start = System.nanoTime();
 
@@ -123,14 +123,14 @@ public class Sort {
             midpoint = (max - min) / 2 + min;
         }
         if (array[midpoint] < value) {
-            return binarySearch(array, value, midpoint + 1, max);
+            min = midpoint + 1;
+            // return binarySearch(array, value, midpoint + 1, max);
+        } else if (array[midpoint] > value) {
+            max = midpoint - 1;
         } else {
-            if (array[midpoint] > value) {
-                return binarySearch(array, value, min, midpoint - 1);
-            } else {
-                return start;
-            }
-        }
+            System.out.println("HUHIU");
+            return midpoint;}
+
     }
 
     public static long linearFind(int[] array, int value) {
